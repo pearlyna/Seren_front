@@ -10,7 +10,7 @@ import '../estilos/Local.scss';
 const Local = () => {
 return (
 <section className="local_box">
-    <img className="img-map" src={imgMap} alt="image map" />
+    <img className="img-map" src={imgMap} alt="map" />
 
     <div className="right_box_local">
         <h1>Encontre-nos Aqui</h1>
