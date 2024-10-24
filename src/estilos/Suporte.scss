@@ -1,0 +1,89 @@
+.suporte_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    padding: 0 20px;
+    width: fit-content;
+    margin-bottom: 130px;
+}
+
+.suporte_box h2,
+.suporte_box p {
+    text-align: center;
+    font-family: 'Geologica', sans-serif;
+}
+
+.suporte_box h2 {
+    color: #557085;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.suporte_box p {
+    color: #525252;
+    font-size: 18px;
+    margin-top: -20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+form .nome_input,
+form .email_input,
+form .mensagem_input {
+    margin-bottom: 15px;
+}
+
+form label {
+    text-align: left;
+    display: block;
+    font-family: 'Geologica', sans-serif;
+    margin-bottom: -10px;
+}
+
+form input,
+form textarea {
+    width: 472px;
+    padding: 10px;
+    border: 1px solid #557085;
+    background-color: #F7F7F7;
+}
+
+form input {
+    height: 25px;
+}
+
+form textarea {
+    height: 60px;
+}
+
+button {
+    padding: 10px 40px;
+    background-color: #40749C;
+    color: #fff;
+    font-family: 'Geologica', sans-serif;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: bold;
+    align-self: center;
+    justify-self: center;
+}
+
+button:hover {
+    background-color: #b8c5ff;
+    color: #525252;
+}
+
+@media (max-width: 768px) {
+
+    form input,
+    form textarea {
+        width: 400px;
+    }
+}

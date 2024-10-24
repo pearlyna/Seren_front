@@ -1,0 +1,78 @@
+.header {
+    padding: 10px 0;
+    padding-right: 110px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        padding: 10px 20px;
+    }
+}
+
+.logo img {
+    height: 21.7px;
+    width: 21.7px;
+    border: 1px solid #A6B4BF;
+    border-radius: 50px;
+    padding: 8px;
+    margin-left: -20px;
+
+    @media (max-width: 768px) {
+        margin-bottom: 10px;
+    }
+}
+
+nav {
+    display: flex;
+    gap: 70px;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+nav a {
+    text-decoration: none;
+    color: #525252;
+    position: relative;
+}
+
+.home::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+    bottom: -2px;
+    left: 0;
+}
+
+.home:hover::after {
+    transform: scaleX(0);
+    transform-origin: bottom left;
+    transition: transform 0.3s ease-out;
+}
+
+.home:hover {
+    color: #557085;
+}
+
+.home {
+    background-color: #ffffff;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.acesso_dono {
+    background-color: #E5E4E8;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.acesso_dono:hover {
+    background-color: #557085;
+    color: white;
+}

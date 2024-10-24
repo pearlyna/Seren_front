@@ -1,0 +1,20 @@
+.logotipo h1 {
+    font-size: 24px;
+    font-weight: bold;
+    align-items: center;
+    text-align: center;
+}
+
+.gray {
+    color: #B1B1B1;
+}
+
+.blue {
+    color: #C1CFE1;
+}
+
+@media (max-width: 768px) {
+    .logotipo h1 {
+        text-align: center;
+    }
+}

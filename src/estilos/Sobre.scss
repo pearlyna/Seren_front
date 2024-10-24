@@ -1,0 +1,111 @@
+.sobre_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    justify-self: center;
+    width: 100%;
+    margin-bottom: 150px;
+    border-left: 10px solid #E9EDEF;
+    padding-left: 50px;
+}
+
+.right_caixa,
+.left_caixa {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    text-align: left;
+}
+
+.left_caixa {
+    padding: 0 20px;
+    padding-top: 40px;
+}
+
+.titulo h2 {
+    flex-direction: column;
+    width: 100%;
+    font-size: 45px;
+    color: #557085;
+    font-family: 'Geologica', sans-serif;
+}
+
+.p {
+    font-size: 15px;
+    color: #525252;
+    font-family: 'Geologica', sans-serif;
+}
+
+.span1 {
+    display: block;
+}
+
+.span2 {
+    display: block;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.span3 {
+    margin-top: 50px;
+    display: block;
+}
+
+.span4 {
+    display: block;
+    margin-top: 30px;
+}
+
+.pic1,
+.pic2 {
+    width: 100%;
+    max-width: 500px;
+    height: 280px;
+    border-radius: 20px;
+}
+
+.ver_botao {
+    background-color: #A27011;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-family: 'Geologica', sans-serif;
+    cursor: pointer;
+    font-size: 16px;
+    align-self: flex-start;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.ver_botao:hover {
+    background-color: #d4a44c;
+    color: #525252;
+}
+
+@media (max-width: 990px) {
+    .sobre_container {
+        flex-direction: column;
+    }
+
+    .right_caixa,
+    .left_caixa {
+        align-items: center;
+        text-align: center;
+    }
+
+    .pic1,
+    .pic2 {
+        width: 100%;
+        max-width: 400px;
+        height: 250;
+        margin: 0 auto;
+    }
+
+    .ver_botao {
+        align-self: center;
+    }
+}

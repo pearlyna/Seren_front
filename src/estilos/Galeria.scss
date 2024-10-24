@@ -1,0 +1,84 @@
+.galeria_box {
+    width: 100%;
+    height: fit-content;
+    padding: 20px 0;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.galeria_box h1 {
+    color: #557085;
+    font-size: 35px;
+    text-align: left;
+    font-family: 'Geologica', sans-serif;
+}
+
+.linha {
+    margin-top: -15px;
+    height: 10px;
+    width: 50px;
+    background-color: #E9EDEF;
+}
+
+.imagens_slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 42px;
+    flex-wrap: wrap;
+    margin-bottom: 150px;
+
+}
+
+.imagens_slide img {
+    width: 290px;
+    height: 228px;
+    border-radius: 15px;
+    transition: opacity 0.5s ease-in-out;
+}
+
+@media (max-width: 1200px) {
+    .galeria_box h1 {
+        text-align: center;
+    }
+
+    .linha {
+        width: 100px;
+        justify-self: center;
+        margin-bottom: 30px;
+    }
+
+    .imagens_slide {
+        flex-wrap: nowrap;
+        overflow: hidden;
+        gap: 10px;
+    }
+
+    .imagens_slide img {
+        width: calc(33.33% - 20px);
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .imagens_slide {
+        flex-wrap: nowrap;
+        overflow: hidden;
+        gap: 10px;
+    }
+
+    .imagens_slide img {
+        width: calc(50% - 20px);
+        height: auto;
+    }
+}
+
+@media (max-width: 1000px) {
+    .imagens_slide img {
+        width: 100%;
+        max-width: 600px;
+        height: 300px;
+        object-fit: cover;
+        margin: 0 auto;
+    }
+}
