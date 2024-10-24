@@ -11,7 +11,7 @@ return (
         <h2>Marcos Monteiro</h2>
         <p>
             <span className="sobre_dono">
-                hshsOlá, sou Marcos Monteiro, o fundador do SERENVILAR, um espaço <br />
+                Olá, sou Marcos Monteiro, o fundador do SERENVILAR, um espaço <br />
                 dedicado a oferecer acomodações excepcionais para você. Com uma <br />
                 paixão por hospitalidade e um olho atento aos detalhes, criei o  <br />
                 SERENVILARpara ser mais do que um simples lugar para ficar.
