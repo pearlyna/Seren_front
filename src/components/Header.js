@@ -1,19 +1,20 @@
 import React from 'react';
-import logo from '../assets/imgs/serenvilar_logo.png'
-import '../estilos/Header.scss'
+import { Link } from 'react-router-dom';  // Importar o Link do react-router-dom
+import logo from '../assets/imgs/serenvilar_logo.png';
+import '../estilos/Header.scss';
 
 const Header = () => {
-return (
-<header className='header'>
-    <div className='logo'>
+  return (
+    <header className='header'>
+      <div className='logo'>
         <img src={logo} alt='Logo' />
-    </div>
-    <nav>
-        <a href='/' className='home'>Home</a>
-        <a href='/acesso-dono' className='acesso_dono'>Acesso Dono</a>
-    </nav>
-</header>
-);
+      </div>
+      <nav>
+        <Link to='/' className='home'>Home</Link>
+        <Link to='/login' className='acesso_dono'>Acesso Dono</Link>  {/* Link atualizado */}
+      </nav>
+    </header>
+  );
 };
 
 export default Header;

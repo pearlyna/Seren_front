@@ -1,0 +1,56 @@
+/* login.scss */
+.login {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.login h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login form div {
+    margin-bottom: 15px;
+}
+
+.login label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.login input[type="text"],
+.login input[type="password"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login button:hover {
+    background-color: #45a049;
+}
+
+.login p {
+    margin-top: 15px;
+    color: red;
+    text-align: center;
+}
