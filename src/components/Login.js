@@ -21,7 +21,7 @@ const Login = () => {
             const data = await response.json();
 
             if (response.ok) {
-                // Redirecionar para a tela de consulta de quartos
+                // ir para a tela de consulta de quartos
                 navegar('/quartos');
             } else {
                 setErro(data.message);
@@ -33,8 +33,9 @@ const Login = () => {
     };
 
     return (
+        <div className="login-container">
         <div className="login">
-            <h1> Login </h1>
+            <h1> LOGIN </h1>
             <form onSubmit={handleEnviar}>
                 <div>
                     <label htmlFor="email">Email:</label>
@@ -59,6 +60,7 @@ const Login = () => {
                 {erro && <p style={{color: 'red'}}>{erro}</p>}
                 <button type="submit">Entrar</button>
             </form>
+        </div>
         </div>
     );
 };

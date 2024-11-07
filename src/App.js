@@ -13,8 +13,11 @@ import Feedbacks from './components/Feedbacks';
 import Local from './components/Local';
 import Suporte from './components/Suporte';
 import Footer from './components/Footer';
-import Login from './components/Login';  // Importando a tela de Login
+import Login from './components/Login';  
 import Quartos from './components/Quartos';
+import AddQuarto from './components/AddQuarto';
+import EditarQuarto from './components/EditarQuarto';
+import ReservaQuarto from './components/ReservaQuarto';
 
 function App() {
     return (
@@ -50,6 +53,9 @@ function App() {
                 } />
                 <Route path="/login" element={<Login />} />  
                 <Route path="/quartos" element={<Quartos />} /> 
+                <Route path="/adicionar-quarto" element={<AddQuarto />} />
+                <Route path="/editar-quarto/:id" element={<EditarQuarto />} />
+                <Route path="/reserva-quarto/:id" element={<ReservaQuarto />} />
             </Routes>
         </Router>
     );
