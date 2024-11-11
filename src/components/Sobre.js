@@ -5,7 +5,7 @@ import "../estilos/Sobre.scss";
 
 const Sobre = () => {
   return (
-    <section className="sobre_container">
+    <section id="sobre" className="sobre_container">
       <section className="right_caixa">
         <div className="titulo">
           <h2>SOBRE</h2>
@@ -47,7 +47,13 @@ const Sobre = () => {
             estadia relaxante e memorável.
           </span>
         </p>
-        <button className="ver_botao">Ver Local</button>
+        <button className="ver_botao" 
+        onClick={() =>{
+          document.getElementById('local').scrollIntoView({ behavior: 'smooth' });
+        }}
+        >
+          Ver Local
+          </button>
       </section>
     </section>
   );

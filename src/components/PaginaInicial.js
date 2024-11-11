@@ -22,7 +22,12 @@ const PaginaInicial = () => {
             <br />
             garantir uma estadia confortável e conveniente.
           </p>
-          <button className="saiba_button">Saiba Mais</button>
+          <button className="saiba_button"
+          onClick={() =>{
+            document.getElementById('sobre').scrollIntoView({ behavior: 'smooth' });
+          }}
+          >
+            Saiba Mais</button>
         </div>
       </div>
     </section>

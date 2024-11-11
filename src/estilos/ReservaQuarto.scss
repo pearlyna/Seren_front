@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
-.reserva_quarto_form_container {
+.reserva_container {
   padding: 50px 0;
   display: flex;
   flex-direction: column;
@@ -31,7 +31,7 @@
   }
 }
 
-.reserva_quarto_form {
+.reserva_form {
   display: flex;
   flex-direction: column;
   width: 521px;
@@ -42,7 +42,7 @@
   }
 }
 
-.reserva_quarto_form label {
+.reserva_form label {
   font-size: 15px;
   color: #525252;
   font-family: "Geologica", sans-serif;
@@ -52,7 +52,7 @@
   }
 }
 
-.reserva_quarto_form input {
+.reserva_form input {
   padding: 10px 15px;
   margin-bottom: 20px;
   border: 1px solid #557085;
@@ -65,7 +65,7 @@
   transition: border-color 0.3s;
   font-family: "Geologica", sans-serif;
 
-  .reserva_quarto_form input:focus {
+  .reserva_form input:focus {
     border-color: rgb(85, 137, 170);
     box-shadow: 0 0 3px rgba(90, 153, 170, 0.5);
   }

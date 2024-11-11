@@ -2,22 +2,26 @@
 
 .local_box {
   background-color: #a6b4bf;
-  width: 100%;
+  margin-bottom: 150px;
+  font-family: "Geologica", sans-serif;
+  padding: 50px;
+}
+.local_container {
+  flex-direction: row;
+  width: 88%;
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-self: center;
-  margin-bottom: 150px;
-  padding: 50px 0;
-  font-family: "Geologica", sans-serif;
+  gap: 30px;
+  align-items: center;
 }
-
 .img-map {
   display: inline-block;
-  width: 722px;
+  width: 100%;
+  max-width: 722px;
   height: 355;
-  padding-left: 110px;
-  padding-right: 50px;
+  background-color: yellow;
+
 }
 
 .right_box_local {
@@ -25,12 +29,14 @@
   justify-content: center;
   text-align: left;
   margin-bottom: 25px;
+  padding: 0;
 }
 
 .right_box_local h1 {
   font-size: 35px;
   color: #304d64;
   font-family: "Geologica", sans-serif;
+  margin-bottom: 46px;
 }
 
 .right_box_local p {
@@ -42,7 +48,6 @@
 .local_icon {
   width: 45px;
   height: 45px;
-  margin-top: 30px;
 }
 
 .pic_box {
@@ -59,13 +64,24 @@
 
 @media (max-width: 768px) {
   .local_box {
-    align-items: center;
+    justify-self: center;
+    width: fit-content;
+    width: 85%;
+  }
+
+  .local_container {
+    width: 400px;
+    justify-self: center;
     flex-direction: column;
   }
 
+  .right_box_local h1 {
+    font-size: 25px;
+  }
+  
   .img-map {
-    width: 450px;
     height: 355;
+    justify-self: center;
   }
 
   .pic_box {

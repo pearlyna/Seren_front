@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap");
 
-.room_management {
+.quartos {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,20 +8,20 @@
   padding: 20px;
 }
 
-.room_management h1 {
+.quartos h1 {
   color: #557085;
   font-size: 30px;
-  font-family: 'Geologica', sans-serif;
+  font-family: "Geologica", sans-serif;
   padding: 20px 10px;
-  border-bottom: 10px solid #E9EDEF;
+  margin-top: 40px;
+  border-bottom: 10px solid #e9edef;
 }
-
 
 .button_container {
   width: 100%;
-  max-width: 750px; 
-  padding: 28px 20px; 
-  margin-top: -35px;
+  max-width: 750px;
+  padding: 28px 20px;
+  margin-top: -80px;
 }
 
 .button {
@@ -29,19 +29,20 @@
   text-decoration: none;
   color: #557085;
   font-size: 17px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   font-weight: 550;
   padding: 13px 0;
   border-radius: 50px;
   border: 1px solid #557085;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.105);
   cursor: pointer;
-  width: 100%; 
+  width: 100%;
 }
-.button:hover{
+.button:hover {
   background-color: #5570853c;
 }
-.room_container {
+.quarto_container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -50,12 +51,12 @@
   max-width: 500px;
 }
 
-.room_container {
+.quarto_container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
 
-.room_container {
+.quarto_container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 130px;
@@ -63,29 +64,28 @@
   max-width: 280px;
 }
 
-.room_wrapper {
+.quarto_wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.room_card {
-  background: #EBEBEB;
+.quarto_card {
+  background: #ebebeb;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   width: 100%;
 
-
-  .room_img {
+  .quarto_img {
     width: 100%;
     height: 281px;
     object-fit: cover;
     margin-bottom: 10px;
   }
 
-  .room_info {
+  .quarto_info {
     padding: 0 15px;
 
     h3 {
@@ -96,7 +96,7 @@
       font-weight: 500;
       background-color: #557085;
       padding: 8px 10px;
-      font-family: 'Geologica', sans-serif;
+      font-family: "Geologica", sans-serif;
     }
 
     .status {
@@ -104,16 +104,15 @@
       color: black;
       margin-bottom: 10px;
       margin-top: 7px;
-      font-family: 'Geologica', sans-serif;
+      font-family: "Geologica", sans-serif;
     }
 
-    .amenities {
-
+    .comodidades {
       div {
         display: flex;
-          align-items: center;
-          margin-bottom: 8px;
-          color: #525252;
+        align-items: center;
+        margin-bottom: 8px;
+        color: #525252;
 
         img {
           width: 19px;
@@ -133,13 +132,13 @@
 
       span {
         background: #557085;
-          padding: 5px 10px;
-          font-size: 13px;
-          font-weight: bold;
-          margin-right: 5px;
-          border-radius: 5px 15px 0 5px;
-          color: white;
-          font-weight: lighter;
+        padding: 5px 10px;
+        font-size: 13px;
+        font-weight: bold;
+        margin-right: 5px;
+        border-radius: 5px 15px 0 5px;
+        color: white;
+        font-weight: lighter;
       }
 
       p {
@@ -159,49 +158,51 @@
   }
 }
 
-.action_buttons {
+.buttoes_acao {
   display: flex;
   justify-content: space-around;
   width: 100%;
   margin: 40px 20px;
 
-  .edit, .delete, .reserve {
+  .editar,
+  .apagar,
+  .reserva {
     padding: 10px 20px;
     font-size: 15px;
     cursor: pointer;
     gap: 10px;
-    font-family: 'Geologica', sans-serif;
+    font-family: "Geologica", sans-serif;
     border: none;
   }
 
-  .edit {
-    background-color: #2B6897;
+  .editar {
+    background-color: #2b6897;
     color: white;
   }
 
-  .delete {
-    background-color: #EC3030;
+  .apagar {
+    background-color: #ec3030;
     color: white;
   }
 
-  .reserve {
-    background-color: #89CD84;
+  .reserva {
+    background-color: #89cd84;
     color: white;
   }
 
-  .edit:hover {
+  .editar:hover {
     background-color: #ffffff;
     text-decoration: underline;
     color: blue;
   }
 
-  .delete:hover {
+  .apagar:hover {
     background-color: #ffffff;
     text-decoration: underline;
     color: red;
   }
 
-  .reserve:hover {
+  .reserva:hover {
     background-color: #ffffff;
     text-decoration: underline;
     color: green;
@@ -209,11 +210,13 @@
 }
 
 @media (max-width: 768px) {
-  .room_container {
+  .quarto_container {
     grid-template-columns: 1fr;
   }
 
-  .room_img {
+  .quarto_img {
     height: 150px;
+  }
+  .room {
   }
 }

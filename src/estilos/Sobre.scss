@@ -11,21 +11,28 @@
   border-left: 10px solid #e9edef;
   padding-left: 50px;
   font-family: "Geologica", sans-serif;
+  gap: 50px;
 }
 
 .right_caixa,
 .left_caixa {
   flex: 1;
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: left;
   align-items: left;
   text-align: left;
 }
 
+.right_caixa {
+  padding-left: 50px;
+}
+
 .left_caixa {
   padding: 0 20px;
   padding-top: 40px;
+  padding-left: 50px;
 }
 
 .titulo h2 {
@@ -92,14 +99,20 @@
 @media (max-width: 990px) {
   .sobre_container {
     flex-direction: column;
+    width: fit-content;
+    justify-self: center;
   }
 
   .right_caixa,
   .left_caixa {
     align-items: center;
-    text-align: center;
+    text-align: left;
+    padding: 0;
   }
 
+  .left_caixa {
+    padding: 0;
+  }
   .pic1,
   .pic2 {
     width: 100%;

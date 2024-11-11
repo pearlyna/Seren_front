@@ -4,7 +4,7 @@ import axios from "axios";
 import "../estilos/EditarQuarto.scss";
 
 const EditarQuarto = () => {
-  const { id } = useParams(); // Pega o ID do quarto da URL
+  const { id } = useParams(); // obter o id do quarto da url
   const navegar = useNavigate();
 
   const [formulario, setFormulario] = useState({
@@ -13,14 +13,14 @@ const EditarQuarto = () => {
     cama: "",
     wifi: "wifi",
     arcondicionado: "arcondicionado",
-    classiAvaliacao: 0,
-    numAvaliacao: 0,
+    avaliacao: 0,
+    numeroAvaliacoes: 0,
     valor: 0,
     status: "Disponível",
     imagem: null,
   });
 
-  // estado extra pra controlar o carregamento
+  // estado adicional para controlar o carregamento
   const [carregando, setCarregando] = useState(true);
 
   useEffect(() => {
@@ -34,49 +34,49 @@ const EditarQuarto = () => {
           cama: dadosQuarto.tamCama,
           wifi: dadosQuarto.wifi,
           arcondicionado: dadosQuarto.ar_condi,
-          classiAvaliacao: dadosQuarto.classiAvaliacao,
-          numAvaliacao: dadosQuarto.numAvaliacao,
+          avaliacao: dadosQuarto.classiAvaliacao,
+          numeroAvaliacoes: dadosQuarto.numAvaliacao,
           valor: dadosQuarto.valor,
           status: dadosQuarto.status,
           imagem: null,
         });
-        setCarregando(false); // Define como false quando os dados já estão carregados
+        setCarregando(false); // definir como false quando os dados são carregados
       } catch (erro) {
         console.error("Erro ao buscar dados do quarto:", erro);
         alert(`Erro: ${erro.message}`);
-        setCarregando(false); // Define como false em caso de erro
+        setCarregando(false); // definir como false se tiver erro
       }
     };
 
     buscarDadosQuarto();
   }, [id]);
 
-  const handleMudanca = (e) => {
+  const handleMudar = (e) => {
     const { name, value } = e.target;
-    setFormulario((formularioAnterior) => ({
-      ...formularioAnterior,
+    setFormulario((prevFormulario) => ({
+      ...prevFormulario,
       [name]: value,
     }));
   };
 
-  const handleMudancaNumero = (e) => {
+  const handleNumero = (e) => {
     const { name, value } = e.target;
     const valorNumerico = value.replace(/\D/g, "");
     const valorFormatado = valorNumerico.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    setFormulario((formularioAnterior) => ({
-      ...formularioAnterior,
+    setFormulario((prevFormulario) => ({
+      ...prevFormulario,
       [name]: valorFormatado,
     }));
   };
 
-  const handleMudancaArquivo = (e) => {
-    setFormulario((formularioAnterior) => ({
-      ...formularioAnterior,
+  const handleImagem = (e) => {
+    setFormulario((prevFormulario) => ({
+      ...prevFormulario,
       imagem: e.target.files[0],
     }));
   };
 
-  const handleEnvio = async (e) => {
+  const handleEnviar = async (e) => {
     e.preventDefault();
     try {
       await axios.put(`http://localhost:5001/quarto/${id}`, {
@@ -85,8 +85,8 @@ const EditarQuarto = () => {
         tamCama: formulario.cama,
         wifi: formulario.wifi,
         ar_condi: formulario.arcondicionado,
-        classiAvaliacao: formulario.classiAvaliacao,
-        numAvaliacao: formulario.numAvaliacao.replace(/,/g, ""),
+        classiAvaliacao: formulario.avaliacao,
+        numAvaliacao: formulario.numeroAvaliacoes.replace(/,/g, ""),
         status: formulario.status,
         valor: formulario.valor,
       });
@@ -118,12 +118,12 @@ const EditarQuarto = () => {
   }
 
   return (
-    <div className="formulario_editar_quarto_container">
+    <div className="editar_container">
       <h1>Editar Quarto</h1>
-      <form onSubmit={handleEnvio} className="formulario_editar_quarto">
+      <form onSubmit={handleEnviar} className="editar_form">
         <label>
           Imagem:
-          <input type="file" name="imagem" onChange={handleMudancaArquivo} />
+          <input type="file" name="imagem" onChange={handleImagem} />
         </label>
 
         <label>
@@ -131,7 +131,7 @@ const EditarQuarto = () => {
           <select
             name="banheiro"
             value={formulario.banheiro}
-            onChange={handleMudanca}
+            onChange={handleMudar}
             required
           >
             <option value="">Selecionar opção</option>
@@ -148,7 +148,7 @@ const EditarQuarto = () => {
             type="text"
             name="nome"
             value={formulario.nome}
-            onChange={handleMudanca}
+            onChange={handleMudar}
             required
           />
         </label>
@@ -158,7 +158,7 @@ const EditarQuarto = () => {
           <select
             name="wifi"
             value={formulario.wifi}
-            onChange={handleMudanca}
+            onChange={handleMudar}
             required
           >
             <option value="">Selecionar opção</option>
@@ -173,7 +173,7 @@ const EditarQuarto = () => {
             type="text"
             name="cama"
             value={formulario.cama}
-            onChange={handleMudanca}
+            onChange={handleMudar}
             required
           />
         </label>
@@ -183,7 +183,7 @@ const EditarQuarto = () => {
           <select
             name="arcondicionado"
             value={formulario.arcondicionado}
-            onChange={handleMudanca}
+            onChange={handleMudar}
             required
           >
             <option value="">Selecionar opção</option>
@@ -197,8 +197,8 @@ const EditarQuarto = () => {
           <input
             type="number"
             name="avaliacao"
-            value={formulario.classiAvaliacao}
-            onChange={handleMudanca}
+            value={formulario.avaliacao}
+            onChange={handleMudar}
             required
           />
         </label>
@@ -209,7 +209,7 @@ const EditarQuarto = () => {
             type="text"
             name="status"
             value={formulario.status}
-            onChange={handleMudanca}
+            onChange={handleMudar}
             disabled
           />
         </label>
@@ -219,8 +219,8 @@ const EditarQuarto = () => {
           <input
             type="text"
             name="numeroAvaliacoes"
-            value={formulario.numAvaliacao}
-            onChange={handleMudancaNumero}
+            value={formulario.numeroAvaliacoes}
+            onChange={handleNumero}
             required
           />
         </label>
@@ -231,12 +231,12 @@ const EditarQuarto = () => {
             type="number"
             name="valor"
             value={formulario.valor}
-            onChange={handleMudanca}
+            onChange={handleMudar}
             required
           />
         </label>
 
-        <button type="submit" className="botao_formulario largura-total">
+        <button type="submit" className="form_botao full-width">
           Salvar
         </button>
       </form>

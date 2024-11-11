@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
-.formulario_adicionar_quarto_container {
+.addicionar_container {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@ h1 {
   margin-bottom: 70px;
 }
 
-.formulario_quarto {
+.add_quarto_form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
@@ -26,7 +26,7 @@ h1 {
   width: 800px;
 }
 
-.formulario_quarto label {
+.add_quarto_form label {
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -36,10 +36,10 @@ h1 {
   font-family: "Geologica", sans-serif;
 }
 
-.formulario_quarto input[type="text"],
-.formulario_quarto input[type="number"],
-.formulario_quarto select,
-.formulario_quarto input[type="file"] {
+.add_quarto_form input[type="text"],
+.add_quarto_form input[type="number"],
+.add_quarto_form select,
+.add_quarto_form input[type="file"] {
   margin-top: 6px;
   padding: 10px 15px;
   font-size: 16px;
@@ -50,19 +50,19 @@ h1 {
   outline: none;
 }
 
-.formulario_quarto input[type="text"]:focus,
-.formulario_quarto input[type="number"]:focus,
-.formulario_quarto select:focus,
-.formulario_quarto input[type="file"]:focus {
+.add_quarto_form input[type="text"]:focus,
+.add_quarto_form input[type="number"]:focus,
+.add_quarto_form select:focus,
+.add_quarto_form input[type="file"]:focus {
   border-color: rgb(85, 137, 170);
   box-shadow: 0 0 3px rgba(90, 153, 170, 0.5);
 }
 
-.formulario_quarto .largura-total {
+.add_quarto_form .full-width {
   grid-column: span 2;
 }
 
-.botao_formulario {
+.add_form_botao {
   width: 100%;
   padding: 11px 0;
   margin-top: 20px;
@@ -78,18 +78,18 @@ h1 {
   transition: background-color 0.3s;
 }
 
-.botao_formulario:hover {
+.add_form_botao:hover {
   background-color: #70afe2;
 }
 
 @media (max-width: 768px) {
-  .formulario_adicionar_quarto_container {
+  .add_room_form_container {
     padding: 100px 0;
     width: 100%;
     height: 100vh;
   }
 
-  .formulario_quarto {
+  .add_quarto_form {
     width: 80%;
     padding: 10px;
     display: flex;
@@ -97,14 +97,14 @@ h1 {
     height: 100vh;
   }
 
-  .botao_formulario {
+  .add_form_botao {
     font-size: 16px;
     padding: 10px 0;
   }
 }
 
 @media (max-width: 480px) {
-  .formulario_adicionar_quarto_container {
+  .add_room_form_container {
     padding: 100px 0;
     width: 100%;
     height: auto;
@@ -114,23 +114,23 @@ h1 {
     font-size: 24px;
   }
 
-  .formulario_quarto {
+  .add_quarto_form {
     width: 80%;
   }
 
-  .formulario_quarto label {
+  .add_quarto_form label {
     font-size: 14px;
   }
 
-  .formulario_quarto input[type="text"],
-  .formulario_quarto input[type="number"],
-  .formulario_quarto select,
-  .formulario_quarto input[type="file"] {
+  .add_quarto_form input[type="text"],
+  .add_quarto_form input[type="number"],
+  .add_quarto_form select,
+  .add_quarto_form input[type="file"] {
     font-size: 14px;
     padding: 8px 10px;
   }
 
-  .botao_formulario {
+  .add_form_botao {
     font-size: 16px;
     padding: 10px 0;
     border-radius: 30px;

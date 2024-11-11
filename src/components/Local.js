@@ -8,7 +8,8 @@ import "../estilos/Local.scss";
 
 const Local = () => {
   return (
-    <section className="local_box">
+    <section id="local" className="local_box">
+      <div className="local_container">
       <img className="img-map" src={imgMap} alt="map" />
 
       <div className="right_box_local">
@@ -27,6 +28,7 @@ const Local = () => {
           <img src={imag2} alt="imag2" />
           <img src={imag3} alt="imag3" />
         </div>
+      </div>
       </div>
     </section>
   );

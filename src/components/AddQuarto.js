@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../estilos/AddQuarto.scss";
 
-function AdicionarQuarto() {
-  const navegar = useNavigate();
-  const [formulario, setFormulario] = useState({
+function AddQuarto() {
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
     nome: "",
     banheiro: "Banheiroprivado",
     cama: "",
@@ -17,102 +17,98 @@ function AdicionarQuarto() {
     imagem: null,
   });
 
-  const handleMudanca = (e) => {
+  const handleMudar = (e) => {
     const { name, value } = e.target;
-    setFormulario((prevFormulario) => ({
-      ...prevFormulario,
+    setForm((prevForm) => ({
+      ...prevForm,
       [name]: value,
     }));
   };
 
-  const handleMudancaNumero = (e) => {
+  const handleNumero = (e) => {
     const { name, value } = e.target;
 
-    // Remove qualquer caractere não numérico
+    // tirar qualquer caractere não numerico
     const valorNumerico = value.replace(/\D/g, "");
 
-    // Formata o número com vírgulas como separadores de milhar
-    const valorFormatado = valorNumerico.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // formatar o numero com virgulas
+    const valorformatado = valorNumerico.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-    setFormulario((prevFormulario) => ({
-      ...prevFormulario,
-      [name]: valorFormatado,
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: valorformatado,
     }));
   };
 
-  const handleMudancaArquivo = (e) => {
-    setFormulario((prevFormulario) => ({
-      ...prevFormulario,
-      imagem: e.target.files[0],
-    }));
+  const handleImagem = (e) => {
+    setForm((prevForm) => ({ ...prevForm, imagem: e.target.files[0] }));
   };
 
-  const handleEnvio = async (e) => {
+  const handleEnviar = async (e) => {
     e.preventDefault();
     try {
-      // Verifica se a imagem foi fornecida
-      if (!formulario.imagem) {
+      // verificar se a imagem é fornecida
+      if (!form.imagem) {
         throw new Error("Imagem do quarto é obrigatória");
       }
 
-      // Envia os dados para o backend
-      const resposta = await fetch("http://localhost:5001/quarto", {
+      const response = await fetch("http://localhost:5001/quarto", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          nome: formulario.nome,
-          banheiro: formulario.banheiro,
-          tamCama: formulario.cama,
-          wifi: formulario.wifi,
-          ar_condi: formulario.arcondicionado,
-          classiAvaliacao: formulario.avaliacao,
-          numAvaliacao: formulario.numero.replace(/,/g, ""), // Remove as vírgulas antes de enviar ao backend
-          status: formulario.status,
-          valor: formulario.valor,
+          nome: form.nome,
+          banheiro: form.banheiro,
+          tamCama: form.cama,
+          wifi: form.wifi,
+          ar_condi: form.arcondicionado,
+          classiAvaliacao: form.avaliacao,
+          numAvaliacao: form.numero.replace(/,/g, ""), // tirar as virgulas antes de enviar para o backend
+          status: form.status,
+          valor: form.valor,
         }),
       });
 
-      if (!resposta.ok) throw new Error("Erro ao salvar o quarto");
-      const resultado = await resposta.json();
+      if (!response.ok) throw new Error("Erro ao salvar o quarto");
+      const result = await response.json();
 
-      // Se a imagem for fornecida, faz o upload
-      const dadosFormulario = new FormData();
-      dadosFormulario.append("imagem", formulario.imagem);
-      const respostaImagem = await fetch(
-        `http://localhost:5001/quarto/${resultado.id}/imagem`,
+      // fazer o upload da imagem se for fornecida
+      const formData = new FormData();
+      formData.append("imagem", form.imagem);
+      const imageResponse = await fetch(
+        `http://localhost:5001/quarto/${result.id}/imagem`,
         {
           method: "PUT",
-          body: dadosFormulario,
+          body: formData,
         }
       );
 
-      if (!respostaImagem.ok) throw new Error("Erro ao salvar a imagem");
+      if (!imageResponse.ok) throw new Error("Erro ao salvar a imagem");
 
       alert("Quarto adicionado com sucesso!");
-      navegar("/quartos");
-    } catch (erro) {
-      console.error("Erro ao salvar o quarto:", erro);
-      alert(`Erro: ${erro.message}`);
+      navigate("/quartos");
+    } catch (error) {
+      console.error("Erro ao salvar o quarto:", error);
+      alert(`Erro: ${error.message}`);
     }
   };
 
   return (
-    <div className="formulario_adicionar_quarto_container">
+    <div className="addicionar_container">
       <h1>Adicionar Quarto</h1>
-      <form onSubmit={handleEnvio} className="formulario_quarto">
+      <form onSubmit={handleEnviar} className="add_quarto_form">
         <label>
           Imagem:
-          <input type="file" name="imagem" onChange={handleMudancaArquivo} />
+          <input type="file" name="imagem" onChange={handleImagem} />
         </label>
 
         <label>
           Banheiro:
           <select
             name="banheiro"
-            value={formulario.banheiro}
-            onChange={handleMudanca}
+            value={form.banheiro}
+            onChange={handleMudar}
             required
           >
             <option value="">Selecionar opção</option>
@@ -128,20 +124,15 @@ function AdicionarQuarto() {
           <input
             type="text"
             name="nome"
-            value={formulario.nome}
-            onChange={handleMudanca}
+            value={form.nome}
+            onChange={handleMudar}
             required
           />
         </label>
 
         <label>
           WiFi:
-          <select
-            name="wifi"
-            value={formulario.wifi}
-            onChange={handleMudanca}
-            required
-          >
+          <select name="wifi" value={form.wifi} onChange={handleMudar} required>
             <option value="">Selecionar opção</option>
             <option value="Wifi">Wifi</option>
             <option value="sem Wifi">sem Wifi</option>
@@ -153,8 +144,8 @@ function AdicionarQuarto() {
           <input
             type="text"
             name="cama"
-            value={formulario.cama}
-            onChange={handleMudanca}
+            value={form.cama}
+            onChange={handleMudar}
             required
           />
         </label>
@@ -163,8 +154,8 @@ function AdicionarQuarto() {
           Ar condicionado:
           <select
             name="arcondicionado"
-            value={formulario.arcondicionado}
-            onChange={handleMudanca}
+            value={form.arcondicionado}
+            onChange={handleMudar}
             required
           >
             <option value="">Selecionar opção</option>
@@ -178,8 +169,8 @@ function AdicionarQuarto() {
           <input
             type="number"
             name="avaliacao"
-            value={formulario.avaliacao}
-            onChange={handleMudanca}
+            value={form.avaliacao}
+            onChange={handleMudar}
             required
           />
         </label>
@@ -189,8 +180,8 @@ function AdicionarQuarto() {
           <input
             type="text"
             name="status"
-            value={formulario.status}
-            onChange={handleMudanca}
+            value={form.status}
+            onChange={handleMudar}
             disabled
           />
         </label>
@@ -200,8 +191,8 @@ function AdicionarQuarto() {
           <input
             type="text"
             name="numero"
-            value={formulario.numero}
-            onChange={handleMudancaNumero}
+            value={form.numero}
+            onChange={handleNumero}
             required
           />
         </label>
@@ -211,13 +202,13 @@ function AdicionarQuarto() {
           <input
             type="number"
             name="valor"
-            value={formulario.valor}
-            onChange={handleMudanca}
+            value={form.valor}
+            onChange={handleMudar}
             required
           />
         </label>
 
-        <button type="submit" className="botao_formulario largura-total">
+        <button type="submit" className="add_form_botao full-width">
           Adicionar
         </button>
       </form>
@@ -225,4 +216,4 @@ function AdicionarQuarto() {
   );
 }
 
-export default AdicionarQuarto;
+export default AddQuarto;

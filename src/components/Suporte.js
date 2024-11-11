@@ -6,7 +6,11 @@ const Suporte = () => {
     <section className="suporte_box">
       <h2>Precisando de Ajuda?</h2>
       <p>Envie sua dúvida</p>
-      <form className="suporte_form">
+      <form 
+        className="suporte_form" 
+        action="https://formspree.io/f/xvgorajk" 
+        method="POST"
+      >
         <div className="nome_input">
           <label htmlFor="name">Nome:</label> <br />
           <input type="text" id="name" name="name" required />
@@ -26,4 +30,5 @@ const Suporte = () => {
     </section>
   );
 };
+
 export default Suporte;
