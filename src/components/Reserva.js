@@ -1,173 +1,76 @@
-import React, { useState, useEffect } from 'react';
-import '../estilos/Quartos.scss'; 
+import React, { useState, useEffect } from "react";
 
-const Quartos = () => {
+import "../estilos/Reserva.scss";
+import showerIcon from "../assets/imgs/showerIcon.png";
+import bedIcon from "../assets/imgs/bedIcon.png";
+import wifiIcon from "../assets/imgs/wifiIcon.png";
+import airIcon from "../assets/imgs/airIcon.png";
+
+const Reserva = () => {
   const [quartos, setQuartos] = useState([]);
-  const [erro, setErro] = useState('');
-  const [showAddForm, setShowAddForm] = useState(false);
-  const [newRoom, setNewRoom] = useState({
-    nome: '',
-    banheiro: '',
-    cama: '',
-    wifi: false,
-    arcondicionado: false,
-    avaliacao: '',
-    numero: '',
-    status: 'Disponível',
-    valor: ''
-  });
+  const [erro, setErro] = useState("");
 
   useEffect(() => {
-    const fetchQuartos = async () => {
+    const buscarQuartos = async () => {
       try {
-        const response = await fetch('http://localhost:5001/quarto');
+        const response = await fetch("http://localhost:5001/quarto");
         if (response.ok) {
           const data = await response.json();
           setQuartos(data);
         } else {
-          setErro('Erro ao carregar quartos');
+          setErro("Erro ao carregar quartos");
         }
       } catch (error) {
-        console.error('Erro:', error);
-        setErro('Erro ao carregar quartos');
+        console.error("Erro:", error);
+        setErro("Erro ao carregar quartos");
       }
     };
 
-    fetchQuartos();
+    buscarQuartos();
   }, []);
 
-  const handleEdit = (id) => {
-    console.log(`Editing room with id: ${id}`);
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      await fetch(`http://localhost:5001/quarto/${id}`, { method: 'DELETE' });
-      setQuartos(quartos.filter((quarto) => quarto.id !== id));
-    } catch (error) {
-      console.error('Erro ao deletar quarto:', error);
-    }
-  };
-
-  const handleReserve = (id) => {
-    console.log(`Reserving room with id: ${id}`);
-  };
-
-  const handleAddRoom = () => {
-    setShowAddForm(!showAddForm);
-  };
-
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setNewRoom((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:5001/quarto', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newRoom),
-      });
-      if (response.ok) {
-        const newRoomData = await response.json();
-        setQuartos([...quartos, { ...newRoom, id: newRoomData.id }]);
-        setShowAddForm(false);
-        setNewRoom({
-          nome: '',
-          banheiro: '',
-          cama: '',
-          wifi: false,
-          arcondicionado: false,
-          avaliacao: '',
-          numero: '',
-          status: 'Disponível',
-          valor: '',
-        });
-      } else {
-        setErro('Erro ao adicionar quarto');
-      }
-    } catch (error) {
-      console.error('Erro ao adicionar quarto:', error);
-    }
-  };
-
   return (
-    <div className="room_management">
-      <h1>Gerenciamento dos Quartos</h1>
-      {erro && <p style={{ color: 'red' }}>{erro}</p>}
-      <div className="add_room">
-        <button onClick={handleAddRoom}>Adicionar Quarto</button>
-      </div>
-      {showAddForm && (
-        <form onSubmit={handleSubmit} className="add_room_form">
-          <input
-            type="text"
-            name="nome"
-            placeholder="Nome do Quarto"
-            value={newRoom.nome}
-            onChange={handleFormChange}
-            required
-          />
-          <input
-            type="text"
-            name="banheiro"
-            placeholder="Tipo de Banheiro"
-            value={newRoom.banheiro}
-            onChange={handleFormChange}
-            required
-          />
-          <input
-            type="text"
-            name="cama"
-            placeholder="Tamanho da Cama"
-            value={newRoom.cama}
-            onChange={handleFormChange}
-            required
-          />
-          <input
-            type="number"
-            name="valor"
-            placeholder="Preço"
-            value={newRoom.valor}
-            onChange={handleFormChange}
-            required
-          />
-          <button type="submit">Salvar Quarto</button>
-        </form>
-      )}
-      <div className="room_container">
+    <div className="quarto_listagem">
+      <h1>Faça sua reserva</h1>
+      {erro && <p style={{ color: "red" }}>{erro}</p>}
+      <div className="container_quartos">
         {quartos.map((quarto) => (
-          <div className="room_card" key={quarto.id}>
+          <div key={quarto.id} className="cartao_quarto">
             <img
               src={`http://localhost:5001/${quarto.imagem}`}
               alt="Quarto"
-              className="room_img"
+              className="imagem_quarto"
             />
-            <div className="room_info">
+            <div className="info_quarto">
               <h3>{quarto.nome}</h3>
               <p className="status">
-                {quarto.status === 'Disponível' ? 'Disponível' : 'Indisponível'}
+                {quarto.status === "Disponível" ? "Disponível" : "Indisponível"}
               </p>
-              <div className="amenities">
-                <div>{quarto.banheiro}</div>
-                <div>{quarto.cama}</div>
-                <div>{quarto.wifi ? 'Wi-Fi gratuito' : 'Sem Wi-Fi'}</div>
-                <div>{quarto.arcondicionado ? 'Ar-condicionado' : 'Sem ar-condicionado'}</div>
+              <div className="comodidades">
+                <div>
+                  <img src={showerIcon} alt="Banheiro Icon" />
+                  {quarto.banheiro}
+                </div>
+                <div>
+                  <img src={bedIcon} alt="Cama Icon" />
+                  {quarto.cama}
+                </div>
+                <div>
+                  <img src={wifiIcon} alt="Wi-Fi Icon" />
+                  {quarto.wifi ? "Wi-Fi gratuito" : "Sem Wi-Fi"}
+                </div>
+                <div>
+                  <img src={airIcon} alt="Ar-condicionado Icon" />
+                  {quarto.arcondicionado
+                    ? "Ar-condicionado"
+                    : "Sem ar-condicionado"}
+                </div>
               </div>
-              <div className="avaliacao_button">
+              <div className="botao_avaliacao">
                 <span>{quarto.avaliacao}</span>
                 <p>{quarto.numero} avaliações</p>
               </div>
               <p className="preco">R$ {quarto.valor}</p>
-            </div>
-            <div className="action_buttons">
-              <button className="edit" onClick={() => handleEdit(quarto.id)}>Editar</button>
-              <button className="delete" onClick={() => handleDelete(quarto.id)}>Apagar</button>
-              <button className="reserve" onClick={() => handleReserve(quarto.id)}>Reserva</button>
             </div>
           </div>
         ))}
@@ -176,4 +79,4 @@ const Quartos = () => {
   );
 };
 
-export default Quartos;
+export default Reserva;

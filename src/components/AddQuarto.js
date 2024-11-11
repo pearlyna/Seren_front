@@ -1,133 +1,228 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../estilos/Quartos.scss';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../estilos/AddQuarto.scss";
 
-function AddQuarto() {
-  const navigate = useNavigate();
-  const [form, setForm] = useState({
-    nome: '',
-    banheiro: '',
-    cama: '',
-    wifi: 'não',
-    arcondicionado: 'não',
+function AdicionarQuarto() {
+  const navegar = useNavigate();
+  const [formulario, setFormulario] = useState({
+    nome: "",
+    banheiro: "Banheiroprivado",
+    cama: "",
+    wifi: "wifi",
+    arcondicionado: "arcondicionado",
     avaliacao: 0,
     numero: 0,
     valor: 0,
-    status: 'disponível',
+    status: "Disponível",
     imagem: null,
   });
 
-  const handleChange = (e) => {
+  const handleMudanca = (e) => {
     const { name, value } = e.target;
-    setForm({
-      ...form,
+    setFormulario((prevFormulario) => ({
+      ...prevFormulario,
       [name]: value,
-    });
+    }));
   };
 
-  const handleFileChange = (e) => {
-    setForm({ ...form, imagem: e.target.files[0] });
+  const handleMudancaNumero = (e) => {
+    const { name, value } = e.target;
+
+    // Remove qualquer caractere não numérico
+    const valorNumerico = value.replace(/\D/g, "");
+
+    // Formata o número com vírgulas como separadores de milhar
+    const valorFormatado = valorNumerico.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    setFormulario((prevFormulario) => ({
+      ...prevFormulario,
+      [name]: valorFormatado,
+    }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleMudancaArquivo = (e) => {
+    setFormulario((prevFormulario) => ({
+      ...prevFormulario,
+      imagem: e.target.files[0],
+    }));
+  };
+
+  const handleEnvio = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    Object.keys(form).forEach((key) => {
-        formData.append(key, form[key]);
-    });
-
     try {
-        const response = await fetch('http://localhost:5001/quarto', { // URL completa do endpoint
-            method: 'POST',
-            body: formData,
-        });
+      // Verifica se a imagem foi fornecida
+      if (!formulario.imagem) {
+        throw new Error("Imagem do quarto é obrigatória");
+      }
 
-        if (!response.ok) {
-            throw new Error('Erro ao salvar o quarto');
+      // Envia os dados para o backend
+      const resposta = await fetch("http://localhost:5001/quarto", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nome: formulario.nome,
+          banheiro: formulario.banheiro,
+          tamCama: formulario.cama,
+          wifi: formulario.wifi,
+          ar_condi: formulario.arcondicionado,
+          classiAvaliacao: formulario.avaliacao,
+          numAvaliacao: formulario.numero.replace(/,/g, ""), // Remove as vírgulas antes de enviar ao backend
+          status: formulario.status,
+          valor: formulario.valor,
+        }),
+      });
+
+      if (!resposta.ok) throw new Error("Erro ao salvar o quarto");
+      const resultado = await resposta.json();
+
+      // Se a imagem for fornecida, faz o upload
+      const dadosFormulario = new FormData();
+      dadosFormulario.append("imagem", formulario.imagem);
+      const respostaImagem = await fetch(
+        `http://localhost:5001/quarto/${resultado.id}/imagem`,
+        {
+          method: "PUT",
+          body: dadosFormulario,
         }
+      );
 
-        const result = await response.json();
-        alert('Quarto adicionado com sucesso!');
-        navigate('/quartos');
-    } catch (error) {
-        console.error('Erro ao salvar o quarto:', error);
-        alert(`Erro: ${error.message}`);
+      if (!respostaImagem.ok) throw new Error("Erro ao salvar a imagem");
+
+      alert("Quarto adicionado com sucesso!");
+      navegar("/quartos");
+    } catch (erro) {
+      console.error("Erro ao salvar o quarto:", erro);
+      alert(`Erro: ${erro.message}`);
     }
-};
-
+  };
 
   return (
-    <div className="add_room_form_container">
-      <h1>Adicionar Novo Quarto</h1>
-      <form onSubmit={handleSubmit} className="add_room_form">
+    <div className="formulario_adicionar_quarto_container">
+      <h1>Adicionar Quarto</h1>
+      <form onSubmit={handleEnvio} className="formulario_quarto">
         <label>
-          Nome:
-          <input type="text" name="nome" value={form.nome} onChange={handleChange} required />
+          Imagem:
+          <input type="file" name="imagem" onChange={handleMudancaArquivo} />
         </label>
-        
+
         <label>
           Banheiro:
-          <select name="banheiro" value={form.banheiro} onChange={handleChange} required>
-            <option value="">Selecione</option>
-            <option value="sim">Sim</option>
-            <option value="não">Não</option>
+          <select
+            name="banheiro"
+            value={formulario.banheiro}
+            onChange={handleMudanca}
+            required
+          >
+            <option value="">Selecionar opção</option>
+            <option value="Banheiro privado">Banheiro privado</option>
+            <option value="Banheiro compartilhado">
+              Banheiro compartilhado
+            </option>
           </select>
         </label>
 
         <label>
-          Cama:
-          <input type="text" name="cama" value={form.cama} onChange={handleChange} required />
+          Nome do quarto:
+          <input
+            type="text"
+            name="nome"
+            value={formulario.nome}
+            onChange={handleMudanca}
+            required
+          />
         </label>
 
         <label>
-          Wi-Fi:
-          <select name="wifi" value={form.wifi} onChange={handleChange} required>
-            <option value="sim">Sim</option>
-            <option value="não">Não</option>
+          WiFi:
+          <select
+            name="wifi"
+            value={formulario.wifi}
+            onChange={handleMudanca}
+            required
+          >
+            <option value="">Selecionar opção</option>
+            <option value="Wifi">Wifi</option>
+            <option value="sem Wifi">sem Wifi</option>
           </select>
         </label>
 
         <label>
-          Ar-condicionado:
-          <select name="arcondicionado" value={form.arcondicionado} onChange={handleChange} required>
-            <option value="sim">Sim</option>
-            <option value="não">Não</option>
+          Tamanho da cama:
+          <input
+            type="text"
+            name="cama"
+            value={formulario.cama}
+            onChange={handleMudanca}
+            required
+          />
+        </label>
+
+        <label>
+          Ar condicionado:
+          <select
+            name="arcondicionado"
+            value={formulario.arcondicionado}
+            onChange={handleMudanca}
+            required
+          >
+            <option value="">Selecionar opção</option>
+            <option value="Ar-condicionado">Ar-condicionado</option>
+            <option value="sem Ar-condicionado">sem Ar-condicionado</option>
           </select>
         </label>
 
         <label>
-          Avaliação:
-          <input type="number" name="avaliacao" value={form.avaliacao} onChange={handleChange} min="0" max="10" required />
+          Classificação de avaliação:
+          <input
+            type="number"
+            name="avaliacao"
+            value={formulario.avaliacao}
+            onChange={handleMudanca}
+            required
+          />
+        </label>
+
+        <label>
+          Status de disponibilidade:
+          <input
+            type="text"
+            name="status"
+            value={formulario.status}
+            onChange={handleMudanca}
+            disabled
+          />
         </label>
 
         <label>
           Número de Avaliações:
-          <input type="number" name="numero" value={form.numero} onChange={handleChange} required />
+          <input
+            type="text"
+            name="numero"
+            value={formulario.numero}
+            onChange={handleMudancaNumero}
+            required
+          />
         </label>
 
         <label>
           Valor:
-          <input type="number" name="valor" value={form.valor} onChange={handleChange} required />
+          <input
+            type="number"
+            name="valor"
+            value={formulario.valor}
+            onChange={handleMudanca}
+            required
+          />
         </label>
 
-        <label>
-          Status:
-          <select name="status" value={form.status} onChange={handleChange} required>
-            <option value="disponível">Disponível</option>
-            <option value="indisponível">Indisponível</option>
-          </select>
-        </label>
-
-        <label>
-          Imagem:
-          <input type="file" name="imagem" onChange={handleFileChange} />
-        </label>
-        
-        <button type="submit">Adicionar Quarto</button>
+        <button type="submit" className="botao_formulario largura-total">
+          Adicionar
+        </button>
       </form>
     </div>
   );
 }
 
-export default AddQuarto;
+export default AdicionarQuarto;

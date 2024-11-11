@@ -1,84 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap");
+
 .local_box {
-    background-color: #A6B4BF;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-self: center;
-    margin-bottom: 150px;
-    padding: 50px 0;
+  background-color: #a6b4bf;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-self: center;
+  margin-bottom: 150px;
+  padding: 50px 0;
+  font-family: "Geologica", sans-serif;
 }
 
 .img-map {
-    display: inline-block;
-    width: 722px;
-    height: 355;
-    padding-left: 110px;
-    padding-right: 50px;
+  display: inline-block;
+  width: 722px;
+  height: 355;
+  padding-left: 110px;
+  padding-right: 50px;
 }
 
 .right_box_local {
-    align-items: left;
-    justify-content: center;
-    text-align: left;
-    margin-bottom: 25px;
+  align-items: left;
+  justify-content: center;
+  text-align: left;
+  margin-bottom: 25px;
 }
 
 .right_box_local h1 {
-    font-size: 35px;
-    color: #304D64;
-    font-family: 'Geologica', sans-serif;
-
+  font-size: 35px;
+  color: #304d64;
+  font-family: "Geologica", sans-serif;
 }
 
 .right_box_local p {
-    color: #304D64;
-    font-size: 16px;
-    font-family: 'Geologica', sans-serif;
-
+  color: #304d64;
+  font-size: 16px;
+  font-family: "Geologica", sans-serif;
 }
 
 .local_icon {
-    width: 45px;
-    height: 45px;
-    margin-top: 30px;
+  width: 45px;
+  height: 45px;
+  margin-top: 30px;
 }
 
 .pic_box {
-    margin-top: 40px;
-    width: fit-content;
-    padding-bottom: 0;
+  margin-top: 40px;
+  width: fit-content;
+  padding-bottom: 0;
 }
 
 .pic_box img {
-    width: 123px;
-    height: 100px;
-    margin-right: 10px;
+  width: 123px;
+  height: 100px;
+  margin-right: 10px;
 }
 
 @media (max-width: 768px) {
-    .local_box {
-        align-items: center;
-        flex-direction: column;
-    }
+  .local_box {
+    align-items: center;
+    flex-direction: column;
+  }
 
-    .img-map {
-        width: 450px;
-        height: 355;
-    }
+  .img-map {
+    width: 450px;
+    height: 355;
+  }
 
-    .pic_box {
-        padding: 0 100px;
-    }
+  .pic_box {
+    padding: 0 100px;
+  }
 
-    .pic_box img {
-        width: 300px;
-        height: 200px;
-    }
+  .pic_box img {
+    width: 300px;
+    height: 200px;
+  }
 
-    .right_box_local {
-        text-align: center;
-        padding: 0 40px;
-    }
-
+  .right_box_local {
+    text-align: center;
+    padding: 0 40px;
+  }
 }

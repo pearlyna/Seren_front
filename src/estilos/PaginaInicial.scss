@@ -1,10 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap");
+
 .pagina_container {
-  background-color: #FEFEFE;
+  background-color: #fefefe;
   align-items: center;
   justify-content: center;
   padding: 0 90px;
   box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.142);
-  margin-bottom: 150px
+  margin-bottom: 150px;
 }
 
 .pagina_box {
@@ -14,6 +16,7 @@
   width: 100%;
   height: 100%;
   gap: 40px;
+  font-family: "Geologica", sans-serif;
 }
 
 .image_box {
@@ -45,11 +48,11 @@
 }
 
 .text_caixa h2 {
-  font-family: 'Geologica', sans-serif;
+  font-family: "Geologica", sans-serif;
   font-size: 35px;
   color: #525252;
   margin-bottom: 20px;
-  font-weight: bolder;
+  font-weight: bold;
   line-height: 1.3;
 }
 
@@ -57,12 +60,12 @@
   font-size: 14px;
   margin-bottom: 20px;
   color: #818181;
-  font-family: 'Geologica', sans-serif;
+  font-family: "Geologica", sans-serif;
   font-style: normal;
   line-height: 1.5;
 }
 
-.button {
+.saiba_button {
   background-color: #557085;
   color: white;
   border: none;
@@ -74,33 +77,33 @@
   font-weight: lighter;
 }
 
-.button:hover {
+.saiba_button:hover {
   color: #557085;
   background-color: #e5e4e8;
 }
 
 @media (min-width: 768px) {
   .pagina_box {
-      flex-direction: row;
-      height: auto;
+    flex-direction: row;
+    height: auto;
   }
 
   .image_box {
-      width: 60%;
-      aspect-ratio: 16 / 9;
+    width: 60%;
+    aspect-ratio: 16 / 9;
   }
 
   .image_box img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 
   .text_caixa {
-      width: 40%;
-      padding: 50px 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    width: 40%;
+    padding: 50px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }

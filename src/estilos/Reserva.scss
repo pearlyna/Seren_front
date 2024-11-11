@@ -1,135 +1,154 @@
-.reserva_box {
+@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap");
+
+.quarto_listagem {
   width: 100%;
   margin: 0 auto;
   margin-bottom: 10px;
 }
 
-h1 {
+.quarto_listagem h1 {
   text-align: left;
   margin-bottom: 20px;
   color: #557085;
   font-size: 35px;
-  font-family: 'Geologica', sans-serif;
+  font-family: "Geologica", sans-serif;
 }
 
-.room_container {
+.container_quartos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 30px;
+  gap: 40px;
+}
 
-  .room_card {
-      background: #EBEBEB;
-      border-radius: 10px;
-      overflow: hidden;
-      height: fit-content;
-  }
+.wrapper_quarto {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
-  .room_img {
-      width: 100%;
-      height: 281px;
-      object-fit: cover;
-      margin-bottom: 10px;
-  }
+.cartao_quarto {
+  background: #ebebeb;
+  border-radius: 10px;
+  overflow: hidden;
+  height: fit-content;
+  max-width: 267px;
+}
 
-  .room_card h3 {
-      display: flex;
-      align-items: left;
-      justify-self: left;
-      font-family: 'Geologica', sans-serif;
-  }
+.imagem_quarto {
+  width: 100%;
+  height: 281px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.info_quarto {
+  padding: 0 15px;
+  justify-self: left;
 
   h3 {
-      display: inline-block;
-      margin: 2px 0;
-      font-size: 18px;
-      text-align: left;
-      color: #ffffff;
-      font-weight: 500;
-      background-color: #557085;
-      padding: 8px 10px;
-      margin-left: 20px;
-      justify-self: left;
+    display: flex;
+    margin: 1px 0;
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: 500;
+    background-color: #557085;
+    padding: 8px 10px;
+    font-family: "Geologica", sans-serif;
+    justify-self: left;
   }
-
 
   .status {
-      text-align: left;
-      font-weight: bold;
-      color: black;
-      margin-bottom: 10px;
-      padding-left: 20px;
-      font-family: 'Geologica', sans-serif;
+    text-align: left;
+    font-weight: 500;
+    color: black;
+    margin-bottom: 10px;
+    margin-top: 7px;
+    font-family: "Geologica", sans-serif;
   }
 
-  .amenities {
-      padding-left: 20px;
-
-      div {
-          display: flex;
-          align-items: center;
-          margin-bottom: 8px;
-          color: #525252;
-
-          img {
-              width: 19px;
-              height: 21px;
-              margin-right: 8px;
-              opacity: 0.6;
-          }
-      }
-  }
-
-  .avaliacao_button {
+  .comodidades {
+    div {
       display: flex;
       align-items: center;
-      padding: 5px;
-      border-radius: 5px;
-      margin-top: 10px;
-      padding-left: 20px;
+      margin-bottom: 8px;
+      color: #525252;
 
-      span {
-          background: #557085;
-          padding: 5px 10px;
-          font-size: 13px;
-          font-weight: bold;
-          margin-right: 5px;
-          border-radius: 5px 15px 0 5px;
-          color: white;
-          font-weight: lighter;
+      img {
+        width: 19px;
+        height: 21px;
+        margin-right: 8px;
+        opacity: 0.6;
       }
+    }
+  }
 
-      p {
-          font-size: 11px;
-          color: #666;
-          margin-bottom: 3px;
-      }
+  .botao_avaliacao {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 10px;
+
+    span {
+      background: #557085;
+      padding: 5px 10px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-right: 5px;
+      border-radius: 5px 15px 0 5px;
+      color: white;
+      font-weight: lighter;
+    }
+
+    p {
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 3px;
+    }
   }
 
   .preco {
-      font-size: 17px;
-      font-weight: 500;
-      color: #000000;
-      margin-top: 0;
-      text-align: right;
-      padding: 0 20px;
+    font-size: 17px;
+    font-weight: 500;
+    color: #000;
+    text-align: right;
+    margin-top: -30px;
+    padding-left: 170px;
   }
 }
-
 
 @media (max-width: 768px) {
-
-  .room_img {
-      height: 140px;
+  .quarto_listagem h1 {
+    text-align: center;
+  }
+  .imagem_quarto {
+    height: 300px;
+  }
+  .cartao_quarto {
+    width: 270px;
+    justify-self: center;
+  }
+  .info_quarto {
+    justify-self: center;
   }
 }
 
-
 @media (max-width: 480px) {
-  .room_card {
-      padding: 8px;
+  .quarto_listagem h1 {
+    text-align: center;
+  }
+  .imagem_quarto {
+    height: 300px;
+  }
+  .info_quarto {
+    padding: 0 15px;
+    justify-self: center;
+  }
+  .cartao_quarto {
+    padding: 8px;
 
-      .room_img {
-          height: 120px;
-      }
+    .imagem_quarto {
+      height: 120px;
+    }
   }
 }

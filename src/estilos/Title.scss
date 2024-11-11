@@ -1,20 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
 .logotipo h1 {
-    font-size: 24px;
-    font-weight: bold;
-    align-items: center;
-    text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  align-items: center;
+  text-align: center;
+  font-family: "Geologica", sans-serif;
 }
 
 .gray {
-    color: #B1B1B1;
+  color: #b1b1b1;
 }
 
 .blue {
-    color: #C1CFE1;
+  color: #c1cfe1;
 }
 
 @media (max-width: 768px) {
-    .logotipo h1 {
-        text-align: center;
-    }
+  .logotipo h1 {
+    text-align: center;
+  }
 }

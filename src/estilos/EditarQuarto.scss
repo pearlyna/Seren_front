@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+.formulario_editar_quarto_container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+
+h1 {
+  font-size: 30px;
+  color: #557085;
+  font-family: "Geologica", sans-serif;
+  margin-bottom: 70px;
+}
+
+.formulario_editar_quarto {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  column-gap: 100px;
+  width: 800px;
+}
+
+.formulario_editar_quarto label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-size: 15px;
+  color: #525252;
+  margin-bottom: 4px;
+  font-family: "Geologica", sans-serif;
+}
+
+.formulario_editar_quarto input[type="text"],
+.formulario_editar_quarto input[type="number"],
+.formulario_editar_quarto select,
+.formulario_editar_quarto input[type="file"] {
+  margin-top: 6px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 1px solid #557085;
+  border-radius: 30px;
+  background-color: #f4f7f9;
+  color: #4a5a67;
+  outline: none;
+}
+
+.formulario_editar_quarto input[type="text"]:focus,
+.formulario_editar_quarto input[type="number"]:focus,
+.formulario_editar_quarto select:focus,
+.formulario_editar_quarto input[type="file"]:focus {
+  border-color: rgb(85, 137, 170);
+  box-shadow: 0 0 3px rgba(90, 153, 170, 0.5);
+}
+
+.formulario_editar_quarto .largura-total {
+  grid-column: span 2;
+}
+
+.botao_formulario {
+  width: 100%;
+  padding: 11px 0;
+  margin-top: 20px;
+  background-color: #557085;
+  color: white;
+  font-size: 22px;
+  font-weight: 500;
+  text-align: center;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  transition: background-color 0.3s;
+}
+
+.botao_formulario:hover {
+  background-color: #70afe2;
+}
+
+
+@media (max-width: 768px) {
+  .formulario_editar_quarto_container {
+    padding: 100px 0;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .formulario_editar_quarto {
+    width: 80%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .botao_formulario {
+    font-size: 16px;
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .formulario_editar_quarto_container {
+    padding: 100px 0;
+    width: 100%;
+    height: auto;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .formulario_editar_quarto {
+    width: 80%;
+  }
+
+  .formulario_editar_quarto label {
+    font-size: 14px;
+  }
+
+  .formulario_editar_quarto input[type="text"],
+  .formulario_editar_quarto input[type="number"],
+  .formulario_editar_quarto select,
+  .formulario_editar_quarto input[type="file"] {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .botao_formulario {
+    font-size: 16px;
+    padding: 10px 0;
+    border-radius: 30px;
+  }
+}

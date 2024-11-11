@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import '../estilos/Quartos.scss';
+import showerIcon from '../assets/imgs/showerIcon.png';
+import bedIcon from '../assets/imgs/bedIcon.png';
+import wifiIcon from '../assets/imgs/wifiIcon.png';
+import airIcon from '../assets/imgs/airIcon.png';
 
 const Quartos = () => {
   const navigate = useNavigate();
@@ -13,6 +18,7 @@ const Quartos = () => {
         const response = await fetch('http://localhost:5001/quarto');
         if (response.ok) {
           const data = await response.json();
+          console.log(data); // Verifique a estrutura e os dados recebidos
           setQuartos(data);
         } else {
           setErro('Erro ao carregar quartos');
@@ -26,13 +32,6 @@ const Quartos = () => {
     fetchQuartos();
   }, []);
 
-  const handleEdit = (id) => {
-    navigate(`/editar-quarto/${id}`);
-  };
-
-  const handleReserve = (id) => {
-    navigate(`/reserva-quarto/${id}`);
-  };
 
   const handleAddRoom = () => {
     navigate('/adicionar-quarto');
@@ -42,7 +41,7 @@ const Quartos = () => {
     try {
       const response = await fetch(`http://localhost:5001/quarto/${id}`, { method: 'DELETE' });
       if (response.ok) {
-        // Remove o quarto da lista localmente após a deleção no backend
+        // tirar o quarto da lista após a deleção no backend
         setQuartos(quartos.filter((quarto) => quarto.id !== id));
       } else {
         setErro('Erro ao deletar quarto');
@@ -55,14 +54,14 @@ const Quartos = () => {
 
   return (
     <div className="room_management">
-      <h1>Gerenciamento dos Quartos</h1>
-      {erro && <p style={{ color: 'red' }}>{erro}</p>}
-      <div className="add_room">
-        <button onClick={handleAddRoom}>Adicionar Quarto</button>
-      </div>
-      <div className="room_container">
-  {quartos.map((quarto) => (
-    <div key={quarto.id} className="room_wrapper">
+    <h1>Gerenciamento dos Quartos</h1>
+    {erro && <p style={{ color: 'red' }}>{erro}</p>}
+    <div className="button_container">
+      <button className="button" onClick={handleAddRoom}>Adicionar quarto</button>
+    </div>
+    <div className="room_container">
+      {quartos.map((quarto) => (
+        <div key={quarto.id} className="room_wrapper">
       <div className="room_card">
         <img
           src={`http://localhost:5001/${quarto.imagem}`}
@@ -75,10 +74,11 @@ const Quartos = () => {
             {quarto.status === 'Disponível' ? 'Disponível' : 'Indisponível'}
           </p>
           <div className="amenities">
-            <div>{quarto.banheiro}</div>
-            <div>{quarto.cama}</div>
-            <div>{quarto.wifi ? 'Wi-Fi gratuito' : 'Sem Wi-Fi'}</div>
-            <div>{quarto.arcondicionado ? 'Ar-condicionado' : 'Sem ar-condicionado'}</div>
+            <div><img src={showerIcon} alt="Banheiro Icon" />{quarto.banheiro}</div>
+            <div><img src={bedIcon} alt="Cama Icon" />{quarto.cama}</div>
+            <div><img src={wifiIcon} alt="Wi-Fi Icon" />{quarto.wifi}</div>
+            <div><img src={airIcon} alt="Ar-condicionado Icon" />{quarto.arcondicionado}</div>
+
           </div>
           <div className="avaliacao_button">
             <span>{quarto.avaliacao}</span>
