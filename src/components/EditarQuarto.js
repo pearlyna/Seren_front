@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../estilos/EditarQuarto.scss";
+import { API_URL } from '../api/constants'
 
 const EditarQuarto = () => {
   const { id } = useParams(); // obter o id do quarto da url
@@ -26,7 +27,7 @@ const EditarQuarto = () => {
   useEffect(() => {
     const buscarDadosQuarto = async () => {
       try {
-        const resposta = await axios.get(`http://localhost:5001/quarto/${id}`);
+        const resposta = await axios.get(`${API_URL}/quarto/${id}`);
         const dadosQuarto = resposta.data;
         setFormulario({
           nome: dadosQuarto.nome,
@@ -79,7 +80,7 @@ const EditarQuarto = () => {
   const handleEnviar = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5001/quarto/${id}`, {
+      await axios.put(`${API_URL}/quarto/${id}`, {
         nome: formulario.nome,
         banheiro: formulario.banheiro,
         tamCama: formulario.cama,
@@ -95,7 +96,7 @@ const EditarQuarto = () => {
         const dadosFormulario = new FormData();
         dadosFormulario.append("imagem", formulario.imagem);
         await axios.put(
-          `http://localhost:5001/quarto/${id}/imagem`,
+          `${API_URL}/quarto/${id}/imagem`,
           dadosFormulario,
           {
             headers: {

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import "../estilos/ReservaQuarto.scss";
+import { API_URL } from '../api/constants'
 
 const ReservaQuarto = () => {
   const { id } = useParams();
@@ -24,7 +25,7 @@ const ReservaQuarto = () => {
     const carregarReservas = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5001/reserva/quarto/${id}`
+          `${API_URL}/reserva/quarto/${id}`
         );
         console.log(response.data); // verificar se o cpf está presente nos dados
         setReservas(response.data);
@@ -59,7 +60,7 @@ const ReservaQuarto = () => {
       if (reservaEditando) {
         // enviar uma requisição PUT
         await axios.put(
-          `http://localhost:5001/reserva/${reservaEditando.id}`,
+          `${API_URL}/reserva/${reservaEditando.id}`,
           reserva
         );
         setMensagem("Reserva atualizada com sucesso!");
@@ -72,7 +73,7 @@ const ReservaQuarto = () => {
       } else {
         // enviar uma requisição POST
         const response = await axios.post(
-          "http://localhost:5001/reserva",
+          `${API_URL}/reserva`,
           reserva
         );
         setMensagem("Reserva realizada com sucesso!");
@@ -116,7 +117,7 @@ const ReservaQuarto = () => {
 
   const handleApagar = async (reservaId) => {
     try {
-      await axios.delete(`http://localhost:5001/reserva/${reservaId}`);
+      await axios.delete(`${API_URL}/reserva/${reservaId}`);
       setReservas((prevReservas) =>
         prevReservas.filter((reserva) => reserva.id !== reservaId)
       );

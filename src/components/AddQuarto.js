@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../estilos/AddQuarto.scss";
+import { API_URL } from '../api/constants'
 
 function AddQuarto() {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ function AddQuarto() {
         throw new Error("Imagem do quarto é obrigatória");
       }
 
-      const response = await fetch("http://localhost:5001/quarto", {
+      const response = await fetch(`${API_URL}/quarto`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +78,7 @@ function AddQuarto() {
       const formData = new FormData();
       formData.append("imagem", form.imagem);
       const imageResponse = await fetch(
-        `http://localhost:5001/quarto/${result.id}/imagem`,
+        `${API_URL}/quarto/${result.id}/imagem`,
         {
           method: "PUT",
           body: formData,
