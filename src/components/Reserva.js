@@ -15,8 +15,11 @@ const Reserva = () => {
     const buscarQuartos = async () => {
       try {
         const response = await fetch(`${API_URL}/quarto`);
+        const text = await response.text();  // Obtém a resposta como texto
+        console.log(text);  // Imprime o conteúdo da resposta para depuração
+  
         if (response.ok) {
-          const data = await response.json();
+          const data = JSON.parse(text); // Agora converte para JSON manualmente
           setQuartos(data);
         } else {
           setErro("Erro ao carregar quartos");
@@ -26,9 +29,10 @@ const Reserva = () => {
         setErro("Erro ao carregar quartos");
       }
     };
-
+  
     buscarQuartos();
   }, []);
+  
 
   return (
     <div className="quarto_listagem">
