@@ -39,7 +39,7 @@ const Quartos = () => {
 
   const handleApagar = async (id) => {
     try {
-      const response = await fetch(`${API_URL}/${id}`, {
+      const response = await fetch(`${API_URL}/quarto/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -131,4 +131,4 @@ const Quartos = () => {
   );
 };
 
-export default Quartos;
+export default Quartos;
