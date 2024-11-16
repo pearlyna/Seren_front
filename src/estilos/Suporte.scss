@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   justify-self: center;
   padding: 0 20px;
   width: fit-content;
@@ -84,10 +85,12 @@
 }
 
 @media (max-width: 768px) {
+
   .suporte_form input,
   .suporte_form textarea {
     width: 400px;
   }
+
   .suporte_box h2 {
     font-size: 25px;
   }

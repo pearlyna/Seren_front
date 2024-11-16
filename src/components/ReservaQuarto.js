@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
@@ -7,26 +7,50 @@ import "../estilos/ReservaQuarto.scss";
 
 const ReservaQuarto = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const [hospede, setHospede] = useState({
     nome: "",
     cpf: "",
     data_checkin: "",
+    horario_checkin: "",
     data_checkout: "",
+    horario_checkout: "",
   });
   const [reservas, setReservas] = useState([]);
   const [reservaEditando, setReservaEditando] = useState(null);
   const [erro, setErro] = useState(null);
   const [mensagem, setMensagem] = useState(null);
 
+  const hoje = new Date().toISOString().split("T")[0]; // data atual no formato
+
+  // função para ver se o cpf contem 11 numeros
+  const validarCPF = (cpf) => {
+    const regex = /^\d{11}$/;
+    return regex.test(cpf);
+  };
+
+  // verificar se o quarto esta disponivel para as datas selecionadas
+  const verificarDisponibilidade = (dataCheckin, dataCheckout) => {
+    return reservas.every((reserva) => {
+
+      // se a reserva sendo editada for a mesma, ignore a comparacao
+      if (reserva.id === reservaEditando?.id) {
+        return true;
+      }
+      const reservaCheckin = reserva.data_checkin;
+      const reservaCheckout = reserva.data_checkout;
+
+      return (
+        (dataCheckin >= reservaCheckout || dataCheckout <= reservaCheckin)
+      );
+    });
+  };
+
+  // carregar as reservas
   useEffect(() => {
     const carregarReservas = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5001/reserva/quarto/${id}`
-        );
-        console.log(response.data); // verificar se o cpf está presente nos dados
+        const response = await axios.get(`http://localhost:5001/reserva/quarto/${id}`);
         setReservas(response.data);
       } catch (error) {
         setErro("Erro ao carregar reservas.");
@@ -45,23 +69,39 @@ const ReservaQuarto = () => {
 
   const handleEnviar = async (event) => {
     event.preventDefault();
+
+    // validação do cpf
+    if (!validarCPF(hospede.cpf)) {
+      setErro("CPF deve conter 11 números.");
+      return;
+    }
+
+    const checkinFormatado = hospede.data_checkin.split("T")[0];
+    const checkoutFormatado = hospede.data_checkout.split("T")[0];
+
+    // validacao para garantir que o check-out não seja anterior ao check-in
+    if (new Date(checkoutFormatado) < new Date(checkinFormatado)) {
+      setErro("A data de check-out não pode ser anterior à data de check-in.");
+      return;
+    }
+
+    // verificar a disponibilidade do quarto
+    if (!verificarDisponibilidade(checkinFormatado, checkoutFormatado)) {
+      setErro("O quarto não está disponível para a data selecionada.");
+      return;
+    }
+
+    const reserva = {
+      ...hospede,
+      fk_quarto: id,
+      data_checkin: checkinFormatado,
+      data_checkout: checkoutFormatado,
+    };
+
     try {
-      const checkinFormatado = hospede.data_checkin.split("T")[0];
-      const checkoutFormatado = hospede.data_checkout.split("T")[0];
-
-      const reserva = {
-        ...hospede,
-        fk_quarto: id,
-        data_checkin: checkinFormatado,
-        data_checkout: checkoutFormatado,
-      };
-
       if (reservaEditando) {
         // enviar uma requisição PUT
-        await axios.put(
-          `http://localhost:5001/reserva/${reservaEditando.id}`,
-          reserva
-        );
+        await axios.put(`http://localhost:5001/reserva/${reservaEditando.id}`, reserva);
         setMensagem("Reserva atualizada com sucesso!");
         setReservas((prev) =>
           prev.map((r) =>
@@ -71,10 +111,7 @@ const ReservaQuarto = () => {
         setReservaEditando(null); // sair do modo de edição
       } else {
         // enviar uma requisição POST
-        const response = await axios.post(
-          "http://localhost:5001/reserva",
-          reserva
-        );
+        const response = await axios.post("http://localhost:5001/reserva", reserva);
         setMensagem("Reserva realizada com sucesso!");
         setReservas((prevReservas) => [
           ...prevReservas,
@@ -83,12 +120,16 @@ const ReservaQuarto = () => {
       }
 
       // reseta o form
-      setHospede({ nome: "", cpf: "", data_checkin: "", data_checkout: "" });
+      setHospede({
+        nome: "",
+        cpf: "",
+        data_checkin: "",
+        horario_checkin: "",
+        data_checkout: "",
+        horario_checkout: "",
+      });
       setErro(null);
 
-      setTimeout(() => {
-        navigate("/quartos");
-      }, 2000);
     } catch (error) {
       setErro("Erro ao realizar a reserva.");
       setMensagem(null);
@@ -96,20 +137,13 @@ const ReservaQuarto = () => {
   };
 
   const handleEditar = (reserva) => {
-    console.log(reserva);
-
-    const checkinFormatado = reserva.data_checkin
-      ? reserva.data_checkin.split("T")[0]
-      : "";
-    const checkoutFormatado = reserva.data_checkout
-      ? reserva.data_checkout.split("T")[0]
-      : "";
-
     setHospede({
       nome: reserva.nome,
       cpf: reserva.cpf,
-      data_checkin: checkinFormatado,
-      data_checkout: checkoutFormatado,
+      data_checkin: reserva.data_checkin?.split("T")[0] || "",
+      horario_checkin: reserva.horario_checkin || "",
+      data_checkout: reserva.data_checkout?.split("T")[0] || "",
+      horario_checkout: reserva.horario_checkout || "",
     });
     setReservaEditando(reserva);
   };
@@ -151,19 +185,37 @@ const ReservaQuarto = () => {
         />
         <label>Id quarto:</label>
         <input type="text" name="fk_quarto" value={id} disabled />
-        <label>Data Checkin:</label>
+        <label>Data Check-in:</label>
         <input
           type="date"
           name="data_checkin"
           value={hospede.data_checkin}
           onChange={handleMudar}
+          min={hoje} // impedir a selecao de datas passadas
           required
         />
-        <label>Data Checkout:</label>
+        <label>Horário Check-in:</label>
+        <input
+          type="time"
+          name="horario_checkin"
+          value={hospede.horario_checkin}
+          onChange={handleMudar}
+          required
+        />
+        <label>Data Check-out:</label>
         <input
           type="date"
           name="data_checkout"
           value={hospede.data_checkout}
+          onChange={handleMudar}
+          min={hoje}
+          required
+        />
+        <label>Horário Check-out:</label>
+        <input
+          type="time"
+          name="horario_checkout"
+          value={hospede.horario_checkout}
           onChange={handleMudar}
           required
         />
@@ -178,7 +230,11 @@ const ReservaQuarto = () => {
             <p>{reserva.nome}</p>
             <p>{reserva.data_checkin?.split("T")[0]}</p>
             <p>-</p>
+            <p>{reserva.horario_checkin}</p>
+            <p>|</p>
             <p>{reserva.data_checkout?.split("T")[0]}</p>
+            <p>-</p>
+            <p>{reserva.horario_checkout}</p>
             <button onClick={() => handleEditar(reserva)}>
               <FontAwesomeIcon icon={faEdit} />
             </button>

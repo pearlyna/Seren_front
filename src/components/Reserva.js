@@ -44,7 +44,7 @@ const Reserva = () => {
             <div className="info_quarto">
               <h3>{quarto.nome}</h3>
               <p className="status">
-                {quarto.status === "Disponível" ? "Disponível" : "Indisponível"}
+                {quarto.status_quar === "Disponível" ? "Disponível" : "Indisponível"}
               </p>
               <div className="comodidades">
                 <div>
@@ -53,7 +53,7 @@ const Reserva = () => {
                 </div>
                 <div>
                   <img src={bedIcon} alt="Cama Icon" />
-                  {quarto.cama}
+                  {quarto.tam_cama}
                 </div>
                 <div>
                   <img src={wifiIcon} alt="Wi-Fi Icon" />
@@ -61,14 +61,12 @@ const Reserva = () => {
                 </div>
                 <div>
                   <img src={airIcon} alt="Ar-condicionado Icon" />
-                  {quarto.arcondicionado
-                    ? "Ar-condicionado"
-                    : "Sem ar-condicionado"}
+                  {quarto.ar_condi}
                 </div>
               </div>
               <div className="botao_avaliacao">
-                <span>{quarto.avaliacao}</span>
-                <p>{quarto.numero} avaliações</p>
+                <span>{quarto.classi_avaliacao}</span>
+                <p>{quarto.num_avaliacao} avaliações</p>
               </div>
               <p className="preco">R$ {quarto.valor}</p>
             </div>

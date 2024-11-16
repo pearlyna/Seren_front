@@ -7,13 +7,13 @@ function AddQuarto() {
   const [form, setForm] = useState({
     nome: "",
     banheiro: "Banheiroprivado",
-    cama: "",
+    tam_cama: "",
     wifi: "wifi",
-    arcondicionado: "arcondicionado",
-    avaliacao: 0,
-    numero: 0,
+    ar_condi: "arcondicionado",
+    classi_avaliacao: 0,
+    num_avaliacao: 0,
     valor: 0,
-    status: "Disponível",
+    status_quar: "Disponível",
     imagem: null,
   });
 
@@ -40,6 +40,7 @@ function AddQuarto() {
     }));
   };
 
+
   const handleImagem = (e) => {
     setForm((prevForm) => ({ ...prevForm, imagem: e.target.files[0] }));
   };
@@ -60,12 +61,12 @@ function AddQuarto() {
         body: JSON.stringify({
           nome: form.nome,
           banheiro: form.banheiro,
-          tamCama: form.cama,
+          tam_cama: form.tam_cama,
           wifi: form.wifi,
-          ar_condi: form.arcondicionado,
-          classiAvaliacao: form.avaliacao,
-          numAvaliacao: form.numero.replace(/,/g, ""), // tirar as virgulas antes de enviar para o backend
-          status: form.status,
+          ar_condi: form.ar_condi,
+          classi_avaliacao: form.classi_avaliacao,
+          num_avaliacao: form.num_avaliacao.replace(/,/g, ""), // tirar as virgulas antes de enviar para o backend
+          status_quar: form.status_quar,
           valor: form.valor,
         }),
       });
@@ -143,8 +144,8 @@ function AddQuarto() {
           Tamanho da cama:
           <input
             type="text"
-            name="cama"
-            value={form.cama}
+            name="tam_cama"
+            value={form.tam_cama}
             onChange={handleMudar}
             required
           />
@@ -153,8 +154,8 @@ function AddQuarto() {
         <label>
           Ar condicionado:
           <select
-            name="arcondicionado"
-            value={form.arcondicionado}
+            name="ar_condi"
+            value={form.ar_condi}
             onChange={handleMudar}
             required
           >
@@ -168,8 +169,8 @@ function AddQuarto() {
           Classificação de avaliação:
           <input
             type="number"
-            name="avaliacao"
-            value={form.avaliacao}
+            name="classi_avaliacao"
+            value={form.classi_avaliacao}
             onChange={handleMudar}
             required
           />
@@ -179,8 +180,8 @@ function AddQuarto() {
           Status de disponibilidade:
           <input
             type="text"
-            name="status"
-            value={form.status}
+            name="status_quar"
+            value={form.status_quar}
             onChange={handleMudar}
             disabled
           />
@@ -190,8 +191,8 @@ function AddQuarto() {
           Número de Avaliações:
           <input
             type="text"
-            name="numero"
-            value={form.numero}
+            name="num_avaliacao"
+            value={form.num_avaliacao}
             onChange={handleNumero}
             required
           />
