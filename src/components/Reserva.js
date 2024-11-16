@@ -5,6 +5,7 @@ import showerIcon from "../assets/imgs/showerIcon.png";
 import bedIcon from "../assets/imgs/bedIcon.png";
 import wifiIcon from "../assets/imgs/wifiIcon.png";
 import airIcon from "../assets/imgs/airIcon.png";
+import { API_URL } from '../api/constants'
 
 const Reserva = () => {
   const [quartos, setQuartos] = useState([]);
@@ -13,9 +14,12 @@ const Reserva = () => {
   useEffect(() => {
     const buscarQuartos = async () => {
       try {
-        const response = await fetch("http://localhost:5001/quarto");
+        const response = await fetch(`${API_URL}/quarto`);
+        const text = await response.text();  
+        console.log(text);  
+  
         if (response.ok) {
-          const data = await response.json();
+          const data = JSON.parse(text); 
           setQuartos(data);
         } else {
           setErro("Erro ao carregar quartos");
@@ -25,9 +29,10 @@ const Reserva = () => {
         setErro("Erro ao carregar quartos");
       }
     };
-
+  
     buscarQuartos();
   }, []);
+  
 
   return (
     <div className="quarto_listagem">
@@ -37,7 +42,7 @@ const Reserva = () => {
         {quartos.map((quarto) => (
           <div key={quarto.id} className="cartao_quarto">
             <img
-              src={`http://localhost:5001/${quarto.imagem}`}
+              src={`${API_URL}/${quarto.imagem}`}
               alt="Quarto"
               className="imagem_quarto"
             />
