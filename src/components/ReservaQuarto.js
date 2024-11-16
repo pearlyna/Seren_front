@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import "../estilos/ReservaQuarto.scss";
-import { API_URL } from '../api/constants'
 
 const ReservaQuarto = () => {
   const { id } = useParams();
@@ -51,14 +50,7 @@ const ReservaQuarto = () => {
   useEffect(() => {
     const carregarReservas = async () => {
       try {
-<<<<<<< HEAD
         const response = await axios.get(`http://localhost:5001/reserva/quarto/${id}`);
-=======
-        const response = await axios.get(
-          `${API_URL}/reserva/quarto/${id}`
-        );
-        console.log(response.data); // verificar se o cpf está presente nos dados
->>>>>>> c86b4ed64de0b8ce6358ea4c1c7e3aa436faea1b
         setReservas(response.data);
       } catch (error) {
         setErro("Erro ao carregar reservas.");
@@ -109,14 +101,7 @@ const ReservaQuarto = () => {
     try {
       if (reservaEditando) {
         // enviar uma requisição PUT
-<<<<<<< HEAD
         await axios.put(`http://localhost:5001/reserva/${reservaEditando.id}`, reserva);
-=======
-        await axios.put(
-          `${API_URL}/reserva/${reservaEditando.id}`,
-          reserva
-        );
->>>>>>> c86b4ed64de0b8ce6358ea4c1c7e3aa436faea1b
         setMensagem("Reserva atualizada com sucesso!");
         setReservas((prev) =>
           prev.map((r) =>
@@ -126,14 +111,7 @@ const ReservaQuarto = () => {
         setReservaEditando(null); // sair do modo de edição
       } else {
         // enviar uma requisição POST
-<<<<<<< HEAD
         const response = await axios.post("http://localhost:5001/reserva", reserva);
-=======
-        const response = await axios.post(
-          `${API_URL}/reserva`,
-          reserva
-        );
->>>>>>> c86b4ed64de0b8ce6358ea4c1c7e3aa436faea1b
         setMensagem("Reserva realizada com sucesso!");
         setReservas((prevReservas) => [
           ...prevReservas,
@@ -172,7 +150,7 @@ const ReservaQuarto = () => {
 
   const handleApagar = async (reservaId) => {
     try {
-      await axios.delete(`${API_URL}/reserva/${reservaId}`);
+      await axios.delete(`http://localhost:5001/reserva/${reservaId}`);
       setReservas((prevReservas) =>
         prevReservas.filter((reserva) => reserva.id !== reservaId)
       );

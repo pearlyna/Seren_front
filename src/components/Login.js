@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../estilos/Login.scss";
-import { API_URL } from '../api/constants'
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +12,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `${API_URL}/login?email=${encodeURIComponent(
+        `http://localhost:5001/login?email=${encodeURIComponent(
           email
         )}&senha=${encodeURIComponent(senha)}`,
         {

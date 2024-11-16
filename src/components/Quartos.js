@@ -6,7 +6,6 @@ import showerIcon from "../assets/imgs/showerIcon.png";
 import bedIcon from "../assets/imgs/bedIcon.png";
 import wifiIcon from "../assets/imgs/wifiIcon.png";
 import airIcon from "../assets/imgs/airIcon.png";
-import { API_URL } from '../api/constants'
 
 const Quartos = () => {
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ const Quartos = () => {
   useEffect(() => {
     const fetchQuartos = async () => {
       try {
-        const response = await fetch(`${API_URL}/quarto`);
+        const response = await fetch("http://localhost:5001/quarto");
         if (response.ok) {
           const data = await response.json();
           console.log(data);
@@ -39,7 +38,7 @@ const Quartos = () => {
 
   const handleApagar = async (id) => {
     try {
-      const response = await fetch(`${API_URL}/quarto/${id}`, {
+      const response = await fetch(`http://localhost:5001/quarto/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -68,7 +67,7 @@ const Quartos = () => {
           <div key={quarto.id} className="quarto_wrapper">
             <div className="quarto_card">
               <img
-                src={`${API_URL}/${quarto.imagem}`}
+                src={`http://localhost:5001/${quarto.imagem}`}
                 alt="Quarto"
                 className="quarto_img"
               />
@@ -131,4 +130,4 @@ const Quartos = () => {
   );
 };
 
-export default Quartos;
+export default Quartos;
