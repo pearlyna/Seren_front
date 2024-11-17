@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../estilos/EditarQuarto.scss";
+import { API_URL } from '../api/constants'
 
 const EditarQuarto = () => {
   const { id } = useParams(); // obter o id do quarto da url
@@ -33,7 +34,7 @@ const EditarQuarto = () => {
   useEffect(() => {
     const buscarDadosQuarto = async () => {
       try {
-        const resposta = await axios.get(`http://localhost:5001/quarto/${id}`);
+        const resposta = await axios.get(`${API_URL}/quarto/${id}`);
         const dadosQuarto = resposta.data;
 
         // atualizar o estado inicial e o form com os dados do quarto
@@ -107,7 +108,7 @@ const EditarQuarto = () => {
       };
 
       // enviar o quarto sem a imagem caso o user nao fez upload
-      await axios.put(`http://localhost:5001/quarto/${id}`, dadosQuarto);
+      await axios.put(`${API_URL}/quarto/${id}`, dadosQuarto);
 
       // caso o user faz um upload de uma nova imagem, envia ela para o backend
       if (formulario.imagem) {
@@ -115,7 +116,7 @@ const EditarQuarto = () => {
         dadosFormulario.append("imagem", formulario.imagem);
 
         await axios.put(
-          `http://localhost:5001/quarto/${id}/imagem`,
+          `${API_URL}/quarto/${id}/imagem`,
           dadosFormulario,
           {
             headers: {
@@ -143,7 +144,7 @@ const EditarQuarto = () => {
       <h1>Editar Quarto</h1>
         {imagemAnterior ? (
           <img
-            src={`http://localhost:5001/${imagemAnterior}`} 
+            src={`${API_URL}/${imagemAnterior}`} 
             alt="Imagem do Quarto"
             className="imagem_anterior"
           />
