@@ -72,7 +72,7 @@ Esse projeto reforça a importância do uso de tecnologia em pequenos negócios 
 
 ## 👩‍💻 Desenvolvido por
 
-Pearl Lyn  
-Projeto Universitário - Desenvolvimento Fullstack (React + Node.js + MySQL)
+Pearl Nyarko 
+Projeto Universitário - Desenvolvimento React (React + Node.js + MySQL)
 
 ---
