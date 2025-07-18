@@ -1,6 +1,6 @@
 # 🏡 SERENVILAR - Sistema de Gerenciamento de Quartos
 
-O **Serenvilar** é um sistema Fullstack desenvolvido para apoiar um pequeno negócio no estilo Airbnb. Este projeto foi criado como parte de um trabalho da faculdade, no qual escolhemos alguém do nosso convívio para desenvolver um site que auxiliasse no crescimento do seu negócio.  
+O **Serenvilar** é um sistema Fullstack desenvolvido para apoiar um pequeno negócio no estilo Airbnb. Este projeto foi criado como parte de um trabalho da faculdade, no qual escolhemos alguém do nosso convívio para desenvolver um site que auxiliasse no gerenciamento do seu negócio.  
 
 Neste caso, o sistema ajuda o dono a gerenciar os quartos disponíveis para estadia, com controle total via login do dono/administrador.
 
